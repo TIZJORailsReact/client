@@ -1,0 +1,47 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  color: white;
+  font-family: 'Gloria Hallelujah', cursive;
+}
+
+
+html,body{
+  font-family: 'Gloria Hallelujah', cursive;
+}
+
+h1 {
+  font-family: 'Gloria Hallelujah', cursive;
+  color: white;
+}
+
+input{
+  border-radius:10px !important;
+}
+
+.app {
+  background-color: black;
+  height: 100vh;
+  padding: 20px;
+}
+
+.custom-button {
+  background-color: white;
+  border-radius: 10px;
+  outline: 0;
+  border: none;
+  cursor:pointer;
+  padding: 15px 30px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #000;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), white, rgba(0, 0, 0, 0));
+  width: 80%;
+  margin: auto;
+}
