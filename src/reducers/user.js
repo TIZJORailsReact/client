@@ -1,6 +1,9 @@
 const initialState = {
   token: '',
   current: {},
+  seasons:[],
+  epiosdes:[],
+  series:[]
 };
 
 export default function (state = initialState, action) {
@@ -14,6 +17,21 @@ export default function (state = initialState, action) {
       return {
         ...state,
         token: action.payload
+      }
+    case "SET_SEASONS":
+      return {
+        ...state,
+        seasons: action.payload
+      }
+    case "SET_SERIES":
+      return {
+        ...state,
+        series: action.payload
+      }
+    case "SET_EPISODES":
+      return {
+        ...state,
+        episodes: action.payload
       }
     case "CLEAR_TOKEN":
       return initialState;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import Notifications from "react-notify-toast";
 import "tabler-react/dist/Tabler.css";
 import Login from './containers/Login';
@@ -18,13 +18,13 @@ const App = () => {
         <Route exact path="/" component={Login}></Route>
         <Route path="/dashboard" component={Dashboard}></Route>
         <Route path="/register" component={Register}></Route>
-        <Route path="/movie" component={Movie}></Route>
-        <Route path="/series" component={Series}></Route>
-        <Route path="/seasons" component={Seasons}></Route>
-        <Route path="/episodes" component={Episode}></Route>
+        <Route path="/movie/:id" component={Movie}></Route>
+        <Route exact path="/series/:id" component={Series}></Route>
+        <Route exact path="/series/:id/seasons/:s_id" component={Seasons}></Route>
+        <Route exact path="/series/:id/seasons/:s_id/episodes/:e_id" component={Episode}></Route>
       </Switch>
     </div>
   );
 }
 
-export default App;
+export default withRouter(App);

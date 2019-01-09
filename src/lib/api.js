@@ -33,12 +33,21 @@ class Api {
     return api.post('user_token',params);
   }
 
-  getMovies(){
+  getMovies(login){
     const api = axios.create({
       baseURL: "http://micro-movies.herokuapp.com/",
       created: false
     });
-    return api.get('movies');
+    return api.get('movies?login=', login);
+  }
+
+  getCurrentUser(params){
+    const api = axios.create({
+      baseURL: "http://localhost:3000/",
+      created: false
+    });
+    this.api.defaults.headers.common['authorization'] = `Bearer ${params}`;
+    return api.get('users/current');
   }
 
   getMovie(params){
@@ -49,12 +58,28 @@ class Api {
     return api.get(`movies/${params}`);
   }
 
-  getSeries(){
+  getFavouritesMovies(params){
+    const api = axios.create({
+      baseURL: "http://micro-movies.herokuapp.com/",
+      created: false
+    });
+    return api.get(`favorites/movies?login=${params}`);
+  }
+
+  getFavouritesSeries(params){
     const api = axios.create({
       baseURL: "http://micro-series.herokuapp.com/",
       created: false
     });
-    return api.get('series');
+    return api.get(`favorites/series?login=${params}`);
+  }
+
+  getSeries(login){
+    const api = axios.create({
+      baseURL: "http://micro-series.herokuapp.com/",
+      created: false
+    });
+    return api.get('series?login=',login);
   }
 
   getSerie(params){
@@ -71,6 +96,38 @@ class Api {
       created: false
     });
     return api.get(`series/${params}/seasons`);
+  }
+
+  addLike(id,params){
+    const api = axios.create({
+      baseURL: "http://micro-movies.herokuapp.com/",
+      created: false
+    });
+    return api.post(`movies/${id}/likes`, params);
+  }
+
+  removeLike(params,login){
+    const api = axios.create({
+      baseURL: "http://micro-movies.herokuapp.com/",
+      created: false
+    });
+    return api.delete(`movies/${params}/likes?login=${login}`);
+  }
+
+  addLikeSeries(id,params){
+    const api = axios.create({
+      baseURL: "http://micro-series.herokuapp.com/",
+      created: false
+    });
+    return api.post(`series/${id}/likes`, params);
+  }
+
+  removeLikeSeries(params,login){
+    const api = axios.create({
+      baseURL: "http://micro-series.herokuapp.com/",
+      created: false
+    });
+    return api.delete(`series/${params}/likes?login=${login}`);
   }
 
   getEpisodes(params){

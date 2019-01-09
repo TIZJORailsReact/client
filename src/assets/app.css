@@ -23,6 +23,7 @@ input{
 .app {
   background-color: black;
   height: 100vh;
+  overflow-y:scroll;
   padding: 20px;
 }
 

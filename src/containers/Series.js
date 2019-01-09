@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import YouTube from 'react-youtube';
 import { connect } from 'react-redux'
+import { setSeries } from '../actions/user'
 import { Redirect, Link } from 'react-router-dom'
 import api from '../api'
 
@@ -9,17 +10,27 @@ class Series extends Component {
     super(props);
     this.state = {
       redirect: false,
-      seasons:[]
+      seasons:[],
+      serie:''
     }
   }
 
   componentDidMount(){
-    api.getSeasons(this.props.location.serie.id)
-      .then(res => this.setState({ seasons: res.data}))
+    if(this.props.location.serie){
+      api.getSeasons(this.props.location.serie.id)
+        .then(res => this.setState({ seasons: res.data}))
+      this.setState({ serie: this.props.location.serie}, () => {
+        this.props.setSeries(this.state.serie)
+      })
+    }
+    else{
+      this.setState({ serie: this.props.series })
+      api.getSeasons(this.props.series.id)
+        .then(res => this.setState({ seasons: res.data }))
+    }
   }
   render() {
     const { user } = this.props;
-    console.log(this.state)
     if (!user.token.jwt) {
       return (
         <Redirect to="/" />
@@ -27,10 +38,10 @@ class Series extends Component {
     }
     return (
       <div>
-        <h1>{this.props.location.serie.name}</h1>
+        <h1>{this.state.serie.name}</h1>
         {this.state.seasons.map((season, key) => {
           return(
-            <Link key={key} to={{ pathname: `/seasons`, season: season }}>
+            <Link key={key} to={{ pathname: `/series/${this.state.serie.id}/seasons/${season.id}`, season: season, sid: this.state.serie.id }}>
               <p>{season.name}</p>
             </Link>
           )
@@ -42,8 +53,9 @@ class Series extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    series: state.user.series
   }
 }
 
-export default connect(mapStateToProps, {})(Series)
+export default connect(mapStateToProps, {setSeries})(Series)

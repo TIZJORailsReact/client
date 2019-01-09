@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import api from '../api';
 import { connect } from 'react-redux'
-import { setToken, setUrl } from '../actions/user'
+import { setToken, setUrl, } from '../actions/user'
 
 class Login extends Component {
   constructor(props) {
@@ -11,7 +11,8 @@ class Login extends Component {
       email: '',
       password: '',
       redirect:false,
-      dashboard:false
+      dashboard:false,
+      error:''
     }
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -33,6 +34,7 @@ class Login extends Component {
         setToken(res.data)
         this.setState({ dashboard: true })
       })
+      .catch(err => this.setState({ error: 'Błędny login'}))
   }
 
   onChange(e){
@@ -60,6 +62,7 @@ class Login extends Component {
         >
           <h1 className="text--orange uk-text-center">Login</h1>
           <hr />
+          <span className="uk-display-inline-block uk-width-1-1 uk-text-center">{this.state.error}</span>
           <div className="uk-container">
             <div className="uk-flex uk-flex-center uk-flex-wrap uk-flex-column">
               <div className="uk-inline uk-margin-bottom uk-margin-top">
