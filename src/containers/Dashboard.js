@@ -50,13 +50,11 @@ class Dashboard extends Component {
 
   render() {
     const { user } = this.props;
-    console.log(this.props)
     if (!user.token.jwt || this.state.signOut ) {
       return(
         <Redirect to ="/" />
       )
     }
-    console.log(this.state)
     return (
       <div className="uk-grid">
         <div className="uk-width-1-1 uk-flex uk-flex-wrap uk-margin-bottom">
@@ -80,7 +78,7 @@ class Dashboard extends Component {
             {this.state.recommendedSeries.map((serie, key) => {
               return (
                 <Link key={key} to={{ pathname: `/series/${serie.id}`, serie: serie }}>
-                  <p>{serie.name}</p>
+                  <p>{serie.name} : {serie.genre}</p>
                 </Link>
               )
             })}
@@ -100,7 +98,7 @@ class Dashboard extends Component {
             {this.state.favouritesSeries.map((serie, key) => {
               return (
                 <Link key={key} to={{ pathname: `/series/${serie.id}`, serie: serie }}>
-                  <p>{serie.name}</p>
+                  <p>{serie.name} : {serie.genre} </p>
                 </Link>
               )
             })}
@@ -135,7 +133,6 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state)
   return{
     user:state.user
   }

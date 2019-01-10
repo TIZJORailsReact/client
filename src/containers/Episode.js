@@ -13,7 +13,13 @@ class Episode extends Component {
     }
     this.handleLike = this.handleLike.bind(this);
   }
-
+  componentDidMount(){
+    api.getFavouritesSeries(this.props.user.current.name)
+      .then(res => {
+        let serie = res.data.filter(serie => serie.name === this.props.location.name)
+        serie.length === 0 ? this.setState({ liked: false }) : this.setState({ liked: true })
+      })
+  }
   handleLike(){
     if (this.state.liked) {
       api.removeLikeSeries(this.props.location.sid, this.props.user.current.name)

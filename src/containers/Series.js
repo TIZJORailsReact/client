@@ -41,7 +41,7 @@ class Series extends Component {
         <h1>{this.state.serie.name}</h1>
         {this.state.seasons.map((season, key) => {
           return(
-            <Link key={key} to={{ pathname: `/series/${this.state.serie.id}/seasons/${season.id}`, season: season, sid: this.state.serie.id }}>
+            <Link key={key} to={{ pathname: `/series/${this.state.serie.id}/seasons/${season.id}`, season: season, sid: this.state.serie.id, name: this.state.serie.name }}>
               <p>{season.name}</p>
             </Link>
           )

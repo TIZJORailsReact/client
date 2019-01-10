@@ -15,7 +15,7 @@ class Movie extends Component {
   }
 
   componentDidMount(){
-    api.getFavourites(this.props.user.current.name)
+    api.getFavouritesMovies(this.props.user.current.name)
       .then(res => {
         let movie = res.data.filter(movie => movie.title === this.props.location.movie.title)
         movie.length === 0 ? this.setState({ liked: false }) : this.setState({ liked: true})          

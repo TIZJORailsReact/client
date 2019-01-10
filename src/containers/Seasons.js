@@ -40,7 +40,7 @@ class Seasons extends Component {
         <h1>{this.state.season.name}</h1>
         {this.state.episodes.map((episode, key) => {
           return (
-            <Link key={key} to={{ pathname: `/series/${this.state.season.id}/seasons/${this.state.season.id}/episodes/${episode.id}`, episode: episode, sid: this.props.location.sid }}>
+            <Link key={key} to={{ pathname: `/series/${this.state.season.id}/seasons/${this.state.season.id}/episodes/${episode.id}`, episode: episode, sid: this.props.location.sid, name: this.props.location.name }}>
               <p>{episode.name}</p>
             </Link>
           )

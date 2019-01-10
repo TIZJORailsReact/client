@@ -34,11 +34,12 @@ class Api {
   }
 
   getMovies(login){
+    console.log(login, "LOGIN")
     const api = axios.create({
       baseURL: "http://micro-movies.herokuapp.com/",
       created: false
     });
-    return api.get('movies?login=', login);
+    return api.get(`movies?login=${login}`);
   }
 
   getCurrentUser(params){
@@ -79,7 +80,7 @@ class Api {
       baseURL: "http://micro-series.herokuapp.com/",
       created: false
     });
-    return api.get('series?login=',login);
+    return api.get(`series?login=${login}`);
   }
 
   getSerie(params){
